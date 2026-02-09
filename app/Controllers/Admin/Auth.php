@@ -15,7 +15,7 @@ class Auth extends BaseController
     }
     public function login()
     {
-        $data = [];
+        $data = [];// 
         if($this->request->getMethod() == 'POST'){
             // print_r($_POST); exit;
             $validation = $this->validate([
