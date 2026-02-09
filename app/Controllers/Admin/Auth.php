@@ -20,7 +20,7 @@ class Auth extends BaseController
             // print_r($_POST); exit;
             $validation = $this->validate([
                 'email'=>[
-                    'rules'=>'required|valid_email|is_not_unique[tbl_admin.email]',
+                    'rules'=>'required|valid_email|is_not_unique[admin.email]',
                     'errors'=>[
                         'required'=>'Email is required',
                         'valid_email'=>'Enter a valid email address',
@@ -42,7 +42,7 @@ class Auth extends BaseController
                 $email = $this->request->getPost('email');
                 $password = $this->request->getPost('password');
                 $user_info = $this->authmodel->isvalidate($email);
-                if(!isset($user_info->user_id)){
+                if(!isset($user_info->id)){
                     // print_r($user_info); exit;
                     session()->setFlashdata('message','<div class="alert alert-danger">Inactive user. Contact administrator...</div>');
                     return redirect()->to(base_url('admin'));
@@ -51,13 +51,13 @@ class Auth extends BaseController
                 $check_password = Hash::check($password, $user_info->password);
                 if($check_password){
                     $sessionData = array(
-                        'user_id' => $user_info->user_id,
+                        'id' => $user_info->id,
                         'name' => $user_info->name,
                         'email' => $user_info->email,
-                        'phone' => $user_info->phone,
-                        'address' => $user_info->address,
-                        'image' => $user_info->image,
-                        'privilege_id' => $user_info->privilege_id,
+                        // 'phone' => $user_info->phone,
+                        // 'address' => $user_info->address,
+                        // 'image' => $user_info->image,
+                        // 'privilege_id' => $user_info->privilege_id,
                         'status' => $user_info->status,
                         'userlogin' => true,
                     );

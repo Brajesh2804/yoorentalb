@@ -8,7 +8,7 @@ class AuthModel extends Model
     public function __construct()
     {
         $this->db = \Config\Database::connect();
-        $this->adminTbl = 'tbl_admin';
+        $this->adminTbl = 'admin';
         // $this->privilegeTbl = 'tbl_privilege';
         // $this->privilegePathTbl = 'tbl_privilege_path';
     }
