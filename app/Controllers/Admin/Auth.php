@@ -32,7 +32,7 @@ class Auth extends BaseController
                     'errors'=>[
                         'required'=>'Password is required',
                         'min_length'=>'Password must have atleast 5 characters in length',
-                        'max_length'=>'Password must not have more than 12 characters in length'
+                        'max_length'=>'Password must not have more than 8 characters in length'
                     ]
                 ]
             ]);
