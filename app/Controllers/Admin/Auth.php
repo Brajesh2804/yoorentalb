@@ -56,7 +56,7 @@ class Auth extends BaseController
                         'email' => $user_info->email,
                         // 'phone' => $user_info->phone,
                         // 'address' => $user_info->address,
-                        // 'image' => $user_info->image,
+                        'image' => $user_info->image,
                         // 'privilege_id' => $user_info->privilege_id,
                         'status' => $user_info->status,
                         'userlogin' => true,

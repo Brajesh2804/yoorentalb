@@ -25,7 +25,7 @@ class Home extends BaseController
     public function add_to_cart(){
         $returndata = [];
         if($this->request->getMethod() == 'POST'){
-            $pro_id = $_POST['pro_id'];
+            $pro_id = $_POST['id'];
             $cart = cart();
             $product = $this->commonmodel->getOneRecord('tbl_product', ['pro_id'=>$pro_id]);
             if(!empty($product)){

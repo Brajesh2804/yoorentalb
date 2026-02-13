@@ -167,7 +167,7 @@ class Users extends BaseController
                           $ext = explode('.',$imgname);
                           $ext = end($ext);
                           $newName = 'u_'.time().'.'.$ext;
-                          $img->move('./public/assets/upload/users/',$newName);
+                          $img->move(FCPATH . 'assets/upload/users/', $newName);
                       }
                   }
                   $post['image'] = $newName;
