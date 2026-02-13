@@ -18,7 +18,7 @@ class Home extends BaseController
         return view('welcome_message');
     }
     public function product_details($url){
-        $data['product'] = $this->commonmodel->getOneRecord('tbl_product',['url'=>$url]);
+        $data['product'] = $this->commonmodel->getOneRecord('product',['url'=>$url]);
         echo "<pre>"; print_r($data['product']); exit;
 
     }

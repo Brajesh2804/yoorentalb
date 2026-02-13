@@ -23,12 +23,7 @@
                                 <span class="text-danger"><?=(isset($validation))?$validation->showError('email'):''?></span> 
 
                             </div>
-                            <div class="form-group">
-                                <label for="">Phone</label>
-                                <input type="numeric" name="phone" id="phone" value="<?=set_value('phone',$user->phone)?>" class="form-control">
-                                <span class="text-danger"><?=(isset($validation))?$validation->showError('phone'):''?></span> 
-
-                            </div>
+                        
                             <div class="form-group">
                                 <label for="">Photo</label>
                                 <input type="file" name="image" id="image"  class="form-control">
