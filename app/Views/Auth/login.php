@@ -21,6 +21,13 @@
     <link rel="shortcut icon" href="<?=base_url('assets/admin/images/favicon.png') ?>" />
   </head>
   <body>
+    <!-- <?php
+    $password = "123456";
+$hash = password_hash($password, PASSWORD_DEFAULT);
+
+echo $hash;
+?> -->
+
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth">
