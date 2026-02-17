@@ -18,7 +18,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?=base_url('assets/admin/css/style.css') ?>">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="<?=base_url('assets/admin/images/favicon.png') ?>" />
+    <link rel="shortcut icon" href="<?=base_url('assets/admin/images/logo1a.png') ?>" />
   </head>
   <body>
     <!-- <?php
@@ -35,7 +35,7 @@ echo $hash;
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left p-5">
                 <div class="brand-logo">
-                  <img src="<?=base_url('assets/admin/images/logo.svg') ?>">
+                  <img src="<?=base_url('assets/admin/images/logo1.png') ?>">
                 </div>
                 <?php echo session()->getFlashdata('message'); ?>
                 <!-- <h4>Hello! let's get started</h4>

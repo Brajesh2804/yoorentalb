@@ -58,13 +58,13 @@ class Users extends BaseController
                       'regex_match'=>'Password must start with capital letter, and containing at least 1 lowercase, 1 special character and 1 digit.',
                   ]
                   ],
-            //   'cpassword'=>[
-            //       'rules'=>'required|matches[password]',
-            //       'errors'=>[
-            //           'required'=>'Confirm password is required',
-            //           'matches'=>'Confirm Password not matches to password'
-            //       ]
-            //       ],
+              'cpassword'=>[
+                  'rules'=>'required|matches[password]',
+                  'errors'=>[
+                      'required'=>'Confirm password is required',
+                      'matches'=>'Confirm Password not matches to password'
+                  ]
+                  ],
               
             //   'address'=>[
             //       'rules'=>'required',
