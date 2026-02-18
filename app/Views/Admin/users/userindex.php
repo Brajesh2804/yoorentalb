@@ -52,7 +52,7 @@
                                         class="btn btn-primary btn-sm">View</a>
                                     <a href="<?= base_url('admin/edit_user/' . $list->id) ?>" class="btn btn-info btn-sm">Edit</a>
                                     <a href="<?= base_url('admin/delete_user/' . $list->id) ?>"
-                                        class="btn btn-danger btn-sm">Delete</a>
+                                        class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure?')">Delete</a>
                                 </td>
                             </tr>
 

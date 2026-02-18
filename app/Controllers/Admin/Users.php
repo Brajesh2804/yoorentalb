@@ -18,130 +18,133 @@ class Users extends BaseController
     public function index()
     {
         $data = [];
-        $data['users'] = $this->commonmodel->getAllRecord('admin',['status !='=>2],['id','DESC']);
+        $data['users'] = $this->commonmodel->getAllRecord('admin', ['status !=' => 2], ['id', 'DESC']);
         return view('Admin/users/userindex', $data);
     }
-    public function add_user(){
+    public function add_user()
+    {
         $data = [];
-        if($this->request->getMethod() == 'POST'){
+        if ($this->request->getMethod() == 'POST') {
             $validation = $this->validate([
-              'name'=>[
-                  'rules'=>'required',
-                  'errors'=>[
-                      'required'=>'Your Full name is required'
-                  ]
-                  ],
-              'email' =>[
-                  'rules'=>'required|valid_email|is_unique[admin.email]',
-                  'errors'=>[
-                      'required'=>'Email is required',
-                      'valid_email'=>'You must enter a valid email',
-                      'is_unique'=>'Email already taken'
-                  ]
-                  ],
-                // 'phone'=>[
-                //   'rules'=>'required|numeric|min_length[10]|max_length[10]',
-                //   'errors'=>[
-                //       'required'=>'Phone is required',
-                //       'numeric'=>'You must enter numeric value',
-                //       'min_length'=>'Phone Number must be 10 digit in length',
-                //       'max_length'=>'Phone Number must not have more than 10 digit in length'
-                //   ]
-                //   ],
-              'password'=>[
-                  //'rules'=>'required|min_length[5]|max_length[12]|regex_match[^[A-Z]+(?=.*?[a-z])(?=.*?[0-9])(?=.*?\W).*$]',
-                  'rules'=>'required|min_length[5]|max_length[12]',
-                  'errors'=>[
-                      'required'=>'Password is required',
-                      'min_length'=>'Password must have atleast 5 character in length',
-                      'max_length'=>'Password must not have characters more than 12 in length',
-                      'regex_match'=>'Password must start with capital letter, and containing at least 1 lowercase, 1 special character and 1 digit.',
-                  ]
-                  ],
-              'cpassword'=>[
-                  'rules'=>'required|matches[password]',
-                  'errors'=>[
-                      'required'=>'Confirm password is required',
-                      'matches'=>'Confirm Password not matches to password'
-                  ]
-                  ],
-              
-            //   'address'=>[
-            //       'rules'=>'required',
-            //       'errors'=>[
-            //           'required'=>'Address is required'
-            //       ]
-            //       ],
-              'image' =>[
-                  //'rules'=>'uploaded[image]|max_size[image,50]|ext_in[image,png,jpg,jpeg,bmp,gif]',
-                  'rules'=>'max_size[image,100]|ext_in[image,png,jpg,jpeg,bmp,gif]',
-                  'errors'=>[
-                      //'uploaded'=>lang('User.validation.image.uploaded'),
-                      'max_size'=>'Image should not greater than 500 KB of size.',
-                      'ext_in'=>'Image must be extension with png,jpg,jpeg,bmp,gif.',
-                  ]
-              ],
-              'privilege_id'=>[
-                  'rules'=>'required',
-                  'errors'=>[
-                      'required'=>'Privilege is required'
-                  ]
-                ], 
-              'status'=>[
-                  'rules'=>'required',
-                  'errors'=>[
-                      'required'=>'Status must be select'
-                  ]
-              ]
+                'name' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Your Full name is required'
+                    ]
+                ],
+                'email' => [
+                    'rules' => 'required|valid_email|is_unique[admin.email]',
+                    'errors' => [
+                        'required' => 'Email is required',
+                        'valid_email' => 'You must enter a valid email',
+                        'is_unique' => 'Email already taken'
+                    ]
+                ],
+                'password' => [
+                    'rules' => 'required|min_length[5]|max_length[12]',
+                    'errors' => [
+                        'required' => 'Password is required',
+                        'min_length' => 'Password must have atleast 5 character in length',
+                        'max_length' => 'Password must not have characters more than 12 in length',
+                        'regex_match' => 'Password must start with capital letter, and containing at least 1 lowercase, 1 special character and 1 digit.',
+                    ]
+                ],
+                'cpassword' => [
+                    'rules' => 'required|matches[password]',
+                    'errors' => [
+                        'required' => 'Confirm password is required',
+                        'matches' => 'Confirm Password not matches to password'
+                    ]
+                ],
+
+                // 'image' => [
+                //     'rules' => 'max_size[image,5000]|ext_in[image,png,jpg,jpeg,bmp,gif]',
+                //     'errors' => [
+                //         'max_size' => 'Image should not greater than 5000KB of size.',
+                //         'ext_in' => 'Image must be extension with png,jpg,jpeg,bmp,gif.',
+                //     ]
+                // ],
+                'status' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Status must be select'
+                    ]
+                ]
             ]);
-            if(!$validation){
-              $data['validation'] = $this->validator;
-              //return view('admin/users/add_user',$this->data);
-            }else{
-                // print_r($_POST); exit;
+
+            if (!$validation) {
+                $data['validation'] = $this->validator;
+            } else {
+
                 $post['name'] = $this->request->getPost('name');
                 $post['email'] = $this->request->getPost('email');
-                // $post['phone'] = $this->request->getPost('phone');
                 $password = $this->request->getPost('cpassword');
                 $post['password'] = Hash::make($password);
                 $post['status'] = $this->request->getPost('status');
-                // $post['ip_address'] = $this->request->getIPAddress();
                 $post['added_by'] = session('id');
 
-                $inserted = $this->commonmodel->insertRecord('admin', $post);
-                if($inserted){
-                    session()->setFlashdata(['message'=>'User Added Successfully','type'=>'success']);
-                }else{
-                    session()->setFlashdata(['message'=>'Something went wrong. Please Try After Sometimes...','type'=>'danger']);
-                }
-                return redirect()->to('admin/users');
+                // ✅ Image Upload Code Added (Edit wala same logic)
+                $img = $this->request->getFile('image');
 
+                if ($img && $img->getName() != '') {
+                    if ($img->isValid() && !$img->hasMoved()) {
+                        $newName = 'u_' . time() . '.' . $img->getExtension();
+                        $img->move(FCPATH . 'assets/upload/users/', $newName);
+                        $post['image'] = $newName;
+                    }
+                }
+
+
+                $inserted = $this->commonmodel->insertRecord('admin', $post);
+
+                if ($inserted) {
+                    session()->setFlashdata(['message' => 'User Added Successfully', 'type' => 'success']);
+                } else {
+                    session()->setFlashdata(['message' => 'Something went wrong. Please Try After Sometimes...', 'type' => 'danger']);
+                }
+
+                return redirect()->to('admin/users');
             }
         }
+
         return view('Admin/users/add_user', $data);
-        
     }
-    public function view_user($id){
-        echo $id;
+
+    public function view_user($id)
+    {
+        // Single user record fetch karo
+        $data['user'] = $this->commonmodel->getOneRecord('admin', ['id' => $id]);
+
+        if (!$data['user']) {
+            session()->setFlashdata(['message' => 'User not found', 'type' => 'danger']);
+            return redirect()->to('admin/users');
+        }
+
+        return view('Admin/users/view_user', $data);
     }
-    public function edit_user($id){
-        if($this->request->getMethod() == 'POST'){
+
+
+
+
+    public function edit_user($id)
+    {
+        if ($this->request->getMethod() == 'POST') {
             // echo "<pre>"; print_r($_FILES); exit;
             $validation = $this->validate([
-              'name'=>[
-                  'rules'=>'required',
-                  'errors'=>[
-                      'required'=>'Your Full name is required'
-                  ]
-                  ],
-              'email' =>[
-                  'rules'=>'required|valid_email',
-                  'errors'=>[
-                      'required'=>'Email is required',
-                      'valid_email'=>'You must enter a valid email',
-                    //   'is_unique'=>'Email already taken'
-                  ]
-                  ],
+                'name' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Your Full name is required'
+                    ]
+                ],
+                'email' => [
+                    'rules' => 'required|valid_email',
+                    'errors' => [
+                        'required' => 'Email is required',
+                        'valid_email' => 'You must enter a valid email',
+                        //   'is_unique'=>'Email already taken'
+                    ]
+                ],
                 // 'phone'=>[
                 //   'rules'=>'required|numeric|min_length[10]|max_length[10]',
                 //   'errors'=>[
@@ -151,26 +154,26 @@ class Users extends BaseController
                 //       'max_length'=>'Phone Number must not have more than 10 digit in length'
                 //   ]
                 //   ],
-              
-              
-            
+
+
+
             ]);
-            if(!$validation){
-              $data['validation'] = $this->validator;
-              //return view('admin/users/add_user',$this->data);
-            }else{
+            if (!$validation) {
+                $data['validation'] = $this->validator;
+                //return view('admin/users/add_user',$this->data);
+            } else {
                 // print_r($_POST); exit;
-                if($_FILES['image']['name'] != ''){
-                  if($img = $this->request->getFile('image')){ 
-                      $imgname = $img->getName();
-                      if($img->isValid() && !$img->hasMoved()){
-                          $ext = explode('.',$imgname);
-                          $ext = end($ext);
-                          $newName = 'u_'.time().'.'.$ext;
-                          $img->move(FCPATH . 'assets/upload/users/', $newName);
-                      }
-                  }
-                  $post['image'] = $newName;
+                if ($_FILES['image']['name'] != '') {
+                    if ($img = $this->request->getFile('image')) {
+                        $imgname = $img->getName();
+                        if ($img->isValid() && !$img->hasMoved()) {
+                            $ext = explode('.', $imgname);
+                            $ext = end($ext);
+                            $newName = 'u_' . time() . '.' . $ext;
+                            $img->move(FCPATH . 'assets/upload/users/', $newName);
+                        }
+                    }
+                    $post['image'] = $newName;
                 }
                 $post['name'] = $this->request->getPost('name');
                 $post['email'] = $this->request->getPost('email');
@@ -180,26 +183,27 @@ class Users extends BaseController
                 $post['update_by'] = session('id');
                 $post['updated'] = date('Y-m-d H:i:s');
 
-                $updated = $this->commonmodel->updateRecord('admin', $post,['id'=>$id]);
-                if($updated){
-                    session()->setFlashdata(['message'=>'User Updated Successfully','type'=>'success']);
-                }else{
-                    session()->setFlashdata(['message'=>'Something went wrong. Please Try After Sometimes...','type'=>'danger']);
+                $updated = $this->commonmodel->updateRecord('admin', $post, ['id' => $id]);
+                if ($updated) {
+                    session()->setFlashdata(['message' => 'User Updated Successfully', 'type' => 'success']);
+                } else {
+                    session()->setFlashdata(['message' => 'Something went wrong. Please Try After Sometimes...', 'type' => 'danger']);
                 }
                 return redirect()->to('admin/users');
 
             }
         }
-        $data['user'] = $this->commonmodel->getOneRecord('admin',['id'=>$id]);
+        $data['user'] = $this->commonmodel->getOneRecord('admin', ['id' => $id]);
         return view('Admin/users/edit_user', $data);
     }
-    public function delete_user($id){
-        if($id){
-            $updated = $this->commonmodel->updateRecord('admin', ['status'=>2],['id'=>$id]);
-            if($updated){
-                session()->setFlashdata(['message'=>'User deleted Successfully','type'=>'success']);
-            }else{
-                session()->setFlashdata(['message'=>'Something went wrong. Please Try After Sometimes...','type'=>'danger']);
+    public function delete_user($id)
+    {
+        if ($id) {
+            $updated = $this->commonmodel->updateRecord('admin', ['status' => 2], ['id' => $id]);
+            if ($updated) {
+                session()->setFlashdata(['message' => 'User deleted Successfully', 'type' => 'success']);
+            } else {
+                session()->setFlashdata(['message' => 'Something went wrong. Please Try After Sometimes...', 'type' => 'danger']);
             }
         }
         return redirect()->to(base_url('admin/users'));
