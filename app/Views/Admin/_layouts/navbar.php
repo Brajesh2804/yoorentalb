@@ -36,6 +36,12 @@
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
           <a class="dropdown-item" href="<?= base_url('admin/dashboard') ?>">
             <i class="mdi mdi-cached me-2 text-success"></i> Dashboard</a>
+          <a class="dropdown-item" href="<?= base_url('admin/profile') ?>">
+            <i class="mdi mdi-account me-2 text-info"></i> My Profile
+          </a>
+          <a class="dropdown-item" href="<?= base_url('admin/profile/change_password') ?>">
+            <i class="mdi mdi-lock-reset me-2 text-warning"></i> Change Password
+          </a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="<?= base_url('admin/logout') ?>" onclick="return confirm('Are You Sure?')">
             <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>

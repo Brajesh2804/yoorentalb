@@ -29,6 +29,13 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->match(['get', 'post'], 'admin/product-cu', 'Admin\Product::add_edit_product');
     $routes->match(['get', 'post'], 'admin/product-cu/(:num)', 'Admin\Product::add_edit_product/$1');
 
+
+    /************************************Profile***************************************** */
+
+    $routes->match(['get','post'], 'admin/profile', 'Admin\Profile::index');
+    $routes->match(['get','post'], 'admin/profile/change_password', 'Admin\Profile::change_password');
+
+
 });
 
 $routes->group('', ['filter' => 'AlreadyLoggedIn'], function ($routes) {

@@ -198,7 +198,7 @@ class Users extends BaseController
     }
     public function delete_user($id)
     {
-        if ($id) {
+        if ($id != 1) {
             $updated = $this->commonmodel->updateRecord('admin', ['status' => 2], ['id' => $id]);
             if ($updated) {
                 session()->setFlashdata(['message' => 'User deleted Successfully', 'type' => 'success']);
