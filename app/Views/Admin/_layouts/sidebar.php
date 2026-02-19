@@ -90,9 +90,9 @@
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url('admin/users') ?>"> Users List</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="pages/samples/login.html"> Change Password</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url('admin/logout') ?>" onclick="return confirm('Are You Sure?')">
               Logout</a>

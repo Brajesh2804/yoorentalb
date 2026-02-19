@@ -20,13 +20,13 @@
                     <form autocomplete="off" action="<?= base_url('admin/profile/change_password') ?>" method="post">
                     <?= csrf_field(); ?>
                         <div class="row">
-                            <div class="col-md-8 my-2">
+                            <?php /* <div class="col-md-8 my-2">
                                 <div class="form-group">
                                     <label for="oldpwd">Old Password</label>
                                     <input type="password" class="form-control" name="oldpwd" id="oldpwd" value="<?=set_value('oldpwd'); ?>" placeholder="Old Password">
                                     <span class="text-danger"><?=isset($validation)?$validation->showError('oldpwd'):''; ?></span>
                                 </div>
-                            </div>
+                            </div> */ ?>
                             <div class="col-md-8 my-2">
                                 <div class="form-group">
                                     <label for="pwd">New Password</label>
