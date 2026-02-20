@@ -1,13 +1,11 @@
 <?= $this->extend("admin/_layouts/master") ?>
 <?= $this->section("content") ?>
 <div class="content-wrapper">
-
-
     <main id="main" class="main">
 
         <div class="card-header">
             <div class="d-flex justify-content-between">
-                <h4>User Details</h4>
+                <h2>User Details</h2>
                 <a href="<?= base_url('/admin') ?>" class="btn btn-info">Back</a>
             </div>
         </div>
@@ -32,7 +30,11 @@
                     <div class="card">
                         <div class="card-body pt-3">
 
-                            <h5 class="card-title">Profile Details</h5>
+                            <div class="d-flex justify-content-between">
+                                <h3>Profile Details</h3>
+                                <a href="<?= base_url('admin/edit_profile/' . $profile->id) ?>"
+                                    class="btn btn-primary btn-sm">Edit</a>
+                            </div>
 
                             <div class="row mb-3">
                                 <div class="col-lg-3 col-md-4 label">Full Name</div>

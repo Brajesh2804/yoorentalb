@@ -32,8 +32,11 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
 
     /************************************Profile***************************************** */
 
+    // $routes->post('admin/profile/update', 'Admin\Profile::update');
     $routes->match(['get','post'], 'admin/profile', 'Admin\Profile::index');
     $routes->match(['get','post'], 'admin/profile/change_password', 'Admin\Profile::change_password');
+    $routes->match(['get', 'post'], 'admin/edit_profile/(:num)', 'Admin\profile::edit_profile/$1');
+
 
 
 });

@@ -103,4 +103,82 @@ class Profile extends BaseController
             return view('Admin/profile/change_password', $data);
         }
     }
+
+    public function edit_profile($id)
+    {
+        if ($this->request->getMethod() == 'POST') {
+            // echo "<pre>"; print_r($_FILES); exit;
+            $validation = $this->validate([
+                'name' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Your Full name is required'
+                    ]
+                ],
+                'email' => [
+                    'rules' => 'required|valid_email',
+                    'errors' => [
+                        'required' => 'Email is required',
+                        'valid_email' => 'You must enter a valid email',
+                        //   'is_unique'=>'Email already taken'
+                    ]
+                ],
+                'phone' => [
+                    'rules' => 'required|numeric|min_length[10]|max_length[10]',
+                    'errors' => [
+                        'required' => 'Phone is required',
+                        'numeric' => 'You must enter numeric value',
+                        'min_length' => 'Phone Number must be 10 digit in length',
+                        'max_length' => 'Phone Number must not have more than 10 digit in length'
+                    ]
+                ],
+
+                'address' => [
+                    'rules' => 'required|min_length[5]',
+                    'errors' => [
+                        'required' => 'Address is required',
+                        'min_length' => 'Address must be at least 5 characters'
+                    ]
+                ],
+
+            ]);
+            if (!$validation) {
+                $data['validation'] = $this->validator;
+                //return view('admin/users/add_user',$this->data);
+            } else {
+                // print_r($_POST); exit;
+                // if ($_FILES['image']['name'] != '') {
+                //     if ($img = $this->request->getFile('image')) {
+                //         $imgname = $img->getName();
+                //         if ($img->isValid() && !$img->hasMoved()) {
+                //             $ext = explode('.', $imgname);
+                //             $ext = end($ext);
+                //             $newName = 'u_' . time() . '.' . $ext;
+                //             $img->move(FCPATH . 'assets/upload/users/', $newName);
+                //         }
+                //     }
+                //     $post['image'] = $newName;
+                // }
+                $post['name'] = $this->request->getPost('name');
+                $post['email'] = $this->request->getPost('email');
+                $post['phone'] = $this->request->getPost('phone');
+                $post['status'] = $this->request->getPost('status');
+                $post['address'] = $this->request->getPost('address');
+                // $post['ip_address'] = $this->request->getIPAddress();
+                $post['update_by'] = session('id');
+                $post['updated'] = date('Y-m-d H:i:s');
+
+                $updated = $this->commonmodel->updateRecord('admin', $post, ['id' => $id]);
+                if ($updated) {
+                    session()->setFlashdata(['message' => 'User Updated Successfully', 'type' => 'success']);
+                } else {
+                    session()->setFlashdata(['message' => 'Something went wrong. Please Try After Sometimes...', 'type' => 'danger']);
+                }
+                return redirect()->to('admin/profile');
+
+            }
+        }
+        $data['user'] = $this->commonmodel->getOneRecord('admin', ['id' => $id]);
+        return view('Admin/profile/edit_profile', $data);
+    }
 }
