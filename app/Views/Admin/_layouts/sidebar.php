@@ -85,22 +85,26 @@
         <i class="menu-arrow"></i>
         <i class="mdi mdi-lock menu-icon"></i>
       </a>
+
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('admin/users') ?>"> Users List</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#memberCollapse" aria-expanded="false"
-              aria-controls="memberCollapse">
 
-              <span class="menu-title">Member List</span>
+          <!-- Users List -->
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('admin/users') ?>">
+              Users List
+            </a>
+          </li>
+
+          <!-- 🔥 Member List Dropdown Start -->
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#memberSubMenu" aria-expanded="false">
+              Member List
               <i class="menu-arrow"></i>
-              <i class="mdi mdi-account menu-icon"></i>
             </a>
 
-            <div class="collapse" id="memberCollapse">
-              <ul class="nav flex-column sub-menu">
+            <div class="collapse" id="memberSubMenu">
+              <ul class="nav flex-column ms-3">
 
                 <li class="nav-item">
                   <a class="nav-link" href="<?= base_url('admin/members') ?>">
@@ -123,16 +127,15 @@
               </ul>
             </div>
           </li>
+          <!-- 🔥 Member List Dropdown End -->
+
+          <!-- Logout -->
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url('admin/logout') ?>" onclick="return confirm('Are You Sure?')">
-              Logout</a>
+              Logout
+            </a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="pages/samples/error-404.html"> 404 </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/samples/error-500.html"> 500 </a>
-          </li> -->
+
         </ul>
       </div>
     </li>
