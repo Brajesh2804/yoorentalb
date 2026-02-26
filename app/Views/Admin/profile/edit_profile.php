@@ -68,7 +68,6 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <button type="reset" class="btn btn-warning">Reset</button>
-                            <!-- <a href="<?= base_url('admin/users') ?>" class="btn btn-info">Back</a> -->
                         </div>
                     </div>
                 </div>

@@ -53,7 +53,7 @@
                     <!-- Optional Buttons -->
                     <a href="<?= base_url('admin/users/edit_user/' . $user->id) ?>" class="btn btn-warning">Edit</a>
                     <a href="<?= base_url('admin/users/delete_user/' . $user->id) ?>" class="btn btn-danger"
-                        onclick="return confirm('Are you sure?')">Delete</a>0
+                        onclick="return confirm('Are you sure?')">Delete</a>
                 </div>
             </div>
         </div>
