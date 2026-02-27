@@ -1,109 +1,187 @@
 <?=$this->extend("_layout/master") ?>
 <?=$this->section("content") ?>
-<?php /* <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>eCommerce Page with Cart Counter</title>
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <style>
-    .cart-icon {
-      position: relative;
-      cursor: pointer;
-    }
+<div class="container-fluid p-0">
 
-    .cart-badge {
-      position: absolute;
-      top: -5px;
-      right: -10px;
-      background: red;
-      color: white;
-      border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 12px;
-    }
-  </style>
-</head>
-<body>
+  <!-- SEARCH HERO -->
+  <section class="search-hero">
+    <div class="container">
+      <h1>Search Rental Properties Near You</h1>
+      <p>Rooms • Flats • Apartments • Buildings</p>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-dark bg-dark mb-4">
-    <div class="container-fluid d-flex justify-content-between">
-      <span class="navbar-brand mb-0 h1">My eCommerce Store</span>
-      <div class="cart-icon me-3">
-        🛒
-        <?php $cartCount = cart()->totalItems(); ?>
-        <span class="cart-badge" id="cart-count"><?=$cartCount?></span>
+      <div class="search-panel">
+        <input type="text" placeholder="City / Area / Landmark">
+        <select>
+          <option>Property Type</option>
+          <option>Room</option>
+          <option>Flat</option>
+          <option>Apartment</option>
+          <option>Building</option>
+        </select>
+        <select>
+          <option>Budget</option>
+          <option>Below ₹5,000</option>
+          <option>₹5,000 - ₹10,000</option>
+          <option>₹10,000+</option>
+        </select>
+        <button>Search</button>
       </div>
     </div>
-  </nav> */ ?>
+  </section>
 
- <!-- Product Grid -->
-<div class="container">
-  <div class="row g-4">
+  <!-- PROPERTY TYPES -->
+  <section class="py-5">
+    <div class="container">
+      <h3 class="mb-4">Browse by Property Type</h3>
 
-    <!-- Product Card 1 -->
-    <?php if(!empty($products)){
-    foreach($products as $list){ ?>
-    <div class="col-sm-6 col-md-4 col-lg-3">
-      <div class="card h-100 text-center">
-        <a href="<?=base_url('product/'.$list->url)?>" style="text-decoration:none;">
-        <img src="<?= base_url('public/assets/upload/images/'.$list->image) ?>"
-             class="img-fluid mx-auto d-block mt-3"
-             alt="<?=$list->product_name?>"
-             style="width: 120px; height: 120px; object-fit: contain;">
-        </a>
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title"><?=$list->product_name?></h5>
-          <p class="card-text text-success fw-bold">₹<?=$list->price?> <small class="text-muted">(<?=$list->unit.$list->measur?>)</small></p>
-          <button class="btn btn-warning mt-auto add-to-cart" data-pro_id="<?=$list->pro_id?>">Add to Cart</button>
+      <div class="row g-4">
+
+        <div class="col-md-3">
+          <div class="type-card">
+            <img src="<?= base_url('assets/admin/images/1bhk.png') ?>">
+            <h5>Rooms</h5>
+            <p>Affordable single & shared rooms</p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="type-card">
+            <img src="<?= base_url('assets/admin/images/logo2a.png') ?>">
+            <h5>Flats</h5>
+            <p>1 BHK / 2 BHK flats</p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="type-card">
+            <img src="<?= base_url('assets/admin/images/apartement1.png') ?>">
+            <h5>Apartments</h5>
+            <p>Gated & furnished apartments</p>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="type-card">
+            <img src="<?= base_url('assets/admin/images/apartment.png') ?>">
+            <h5>Buildings</h5>
+            <p>Commercial & residential buildings</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED LISTINGS -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h3 class="mb-4">Featured Rentals</h3>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="list-card">
+            <img src="<?= base_url('assets/admin/images/room.jpeg') ?>">
+            <div class="info">
+              <span class="pill">Room</span>
+              <h5>Single Room Near Market</h5>
+              <p>Patna</p>
+              <b>₹4,500 / month</b>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
-    <?php } }else{
-      echo '<p class="text-danger">Product not available</p>';
-    } ?>
+  </section>
 
-    
-
-  </div>
 </div>
+<style>
+  
+.search-hero {
+  background: 
+    /* linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), */
+    url("<?= base_url('assets/admin/images/logo2.png') ?>") no-repeat center center;
+  
+  background-size: cover;
+  padding: 100px 0;
+  color: #0b0808;
+  text-align: center;
+}
 
+.search-hero h1{
+  font-size:38px;
+  font-weight:600;
+}
 
+.search-panel{
+  background:url("<?= base_url('assets/admin/images/logo2.png') ?>") no-repeat center center;
+  margin-top:30px;
+  padding:20px;
+  border-radius:12px;
+  display:flex;
+  gap:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
 
-  <?php /* <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+.search-panel input,
+.search-panel select{
+  flex:1;
+  padding:12px;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+}
 
-  <!-- JavaScript for Cart Count -->
-  <script>
-    $(".add-to-cart").click(function(){
-      var pro_id = $(this).attr('data-pro_id');
+.search-panel button{
+  background:#2563eb;
+  color:#fff;
+  border:none;
+  padding:12px 30px;
+  border-radius:8px;
+}
 
-      // alert(pro_id);
-      if(pro_id){
-        $.ajax({
-          type: 'post',
-          url: "<?=base_url('/add_to_cart')?>",
-          data: {pro_id: pro_id},
-          dataType: 'json',
-          success: function(res){
-            console.log(res);
-            if(res.result == 'success'){
-              $("#cart-count").html(res.cartCount);
+/* TYPE CARDS */
+.type-card{
+  background:#fff;
+  border-radius:14px;
+  padding:15px;
+  text-align:center;
+  box-shadow:0 10px 20px rgba(0,0,0,0.1);
+}
 
-            }else{
-              alert("Error:");
-            }
-          }
-        });
-      }else{
-        return false;
-      }
-    });
-  </script>
-</body>
-</html> */ ?>
+.type-card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.type-card h5{
+  margin-top:15px;
+}
+
+/* LISTING */
+.list-card{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.12);
+}
+
+.list-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.list-card .info{
+  padding:15px;
+}
+
+.pill{
+  background:#22c55e;
+  color:#fff;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;
+}
+</style>
 <?=$this->endSection()?>

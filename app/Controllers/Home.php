@@ -15,7 +15,7 @@ class Home extends BaseController
         // $data['products'] = $this->commonmodel->getAllRecord('tbl_product',['status'=>1, 'is_front'=>1]);
         // echo "<pre>"; print_r($data['products']); exit;
         // return view('home', $data);
-        return view('welcome_message');
+        return view('home');
     }
     
   
