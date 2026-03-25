@@ -25,6 +25,15 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     $routes->match(['get', 'post'], 'admin/view_user/(:num)', 'Admin\Users::view_user/$1');
     $routes->match(['get', 'post'], 'admin/delete_user/(:num)', 'Admin\Users::delete_user/$1');
 
+
+    /******************************Users Group****************************** */
+
+    $routes->get('admin/usergroup', 'Admin\User_group::index');
+    $routes->match(['get', 'post'], 'admin/add_group', 'Admin\User_group::add_group');
+    $routes->match(['get', 'post'], 'admin/edit_group/(:num)', 'Admin\User_group::edit_group/$1');
+    $routes->match(['get', 'post'], 'admin/delete_group/(:num)', 'Admin\User_group::delete_group/$1');
+
+
     /************************************Product*************************************** */
     $routes->get('admin/products', 'Admin\Product::index');
     $routes->match(['get', 'post'], 'admin/product-cu', 'Admin\Product::add_edit_product');
@@ -34,8 +43,8 @@ $routes->group('', ['filter' => 'AuthCheck'], function ($routes) {
     /************************************Profile***************************************** */
 
     // $routes->post('admin/profile/update', 'Admin\Profile::update');
-    $routes->match(['get','post'], 'admin/profile', 'Admin\Profile::index');
-    $routes->match(['get','post'], 'admin/profile/change_password', 'Admin\Profile::change_password');
+    $routes->match(['get', 'post'], 'admin/profile', 'Admin\Profile::index');
+    $routes->match(['get', 'post'], 'admin/profile/change_password', 'Admin\Profile::change_password');
     $routes->match(['get', 'post'], 'admin/edit_profile/(:num)', 'Admin\profile::edit_profile/$1');
 
 

@@ -3,32 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>eCommerce Page with Cart Counter</title>
+  <title>Yoo Rental</title>
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="<?=base_url('public/assets/css/style.css')?>" rel="stylesheet" >
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  
+  <link rel="shortcut icon" href="<?= base_url('assets/admin/images/logo1a.png') ?>" />
+  <link rel="stylesheet" href="<?= base_url('assets/upload/css/style.css') ?>">
 </head>
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-dark bg-dark mb-4">
-    <div class="container-fluid d-flex justify-content-between">
-      <span class="navbar-brand mb-0 h1">My eCommerce Store</span>
-      <div class="cart-icon me-3">
-        🛒
-        <?php $cartCount = cart()->totalItems(); 
-        $href = "javascript:void(0)";
-        if($cartCount > 0){
-          $href = base_url('/checkout'); 
-        }
-        ?>
-
-        <a href="<?=$href ?>" id="checkout"><span class="cart-badge" id="cart-count"><?=$cartCount?></span></a>
-      </div>
-    </div>
-  </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand brand-logo-mini" href="<?= base_url('admin/dashboard') ?>">
+                <img src="<?= base_url('assets/admin/images/logo1a.png') ?>" alt="logo" />
+            </a>
+            <a class="navbar-brand brand-logo" href="<?= base_url('admin/dashboard') ?>">
+                <img src="<?= base_url('assets/admin/images/logo1b.png') ?>" alt="logo" />
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#rooms">Rooms</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#cars">Cars</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#halls">Halls</a></li>
+                    <li class="nav-item ms-3">
+                        <button class="btn btn-outline-light btn-sm">Login</button>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <button class="btn btn-primary btn-sm">Sign Up</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
  <!-- Product Grid -->
 <?php /* <div class="container">

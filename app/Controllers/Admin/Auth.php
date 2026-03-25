@@ -51,8 +51,8 @@ class Auth extends BaseController
 
                 if (!isset($user_info->id)) {
                     // print_r($user_info); exit;
-                    session()->setFlashdata('message', '<div class="alert alert-danger">Inactive user. Contact administrator...</div>');
-                    return redirect()->to('/' . ADMIN_LOGIN)->withInput(); // ADMIN_LOGIN constant use
+                   session()->setFlashdata('message','<div class="alert alert-danger">Inactive user. Contact administrator...</div>');
+                    return redirect()->to(base_url('admin'));
                 }
 
                 $check_password = Hash::check($password, $user_info->password);
@@ -71,8 +71,8 @@ class Auth extends BaseController
                     session()->set($sessionData);
                     return redirect()->to('/admin/dashboard');
                 } else {
-                    session()->setFlashdata('message', '<div class="alert alert-danger">Incorrect Password</div>');
-                    return redirect()->to('/' . ADMIN_LOGIN)->withInput(); // ADMIN_LOGIN constant use
+                    session()->setFlashdata('message','<div class="alert alert-danger">Incorrect Password</div>');
+                    return redirect()->to('/admin')->withInput();
                 }
                 // print_r($user_info);exit;
             }
